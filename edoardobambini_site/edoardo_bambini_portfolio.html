@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edoardo Bambini — AI Engineer & Product Builder</title>
+    <meta name="description" content="AI-focused full-stack engineer and product builder. Building production-ready AI applications from concept to deployment.">
+    <meta name="keywords" content="AI Engineer, Full Stack Developer, React Native, LLM, RAG, Product Builder">
+    <meta property="og:title" content="Edoardo Bambini — AI Engineer & Product Builder">
+    <meta property="og:description" content="Building AI-powered products from concept to production.">
+    <meta property="og:type" content="website">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0b;
+            --bg-secondary: #111113;
+            --bg-tertiary: #18181b;
+            --bg-card: #1a1a1e;
+            --accent-blue: #3b82f6;
+            --accent-cyan: #06b6d4;
+            --accent-violet: #8b5cf6;
+            --accent-rose: #f43f5e;
+            --accent-amber: #f59e0b;
+            --accent-emerald: #10b981;
+            --text-primary: #fafafa;
+            --text-secondary: #a1a1aa;
+            --text-muted: #71717a;
+            --border-subtle: rgba(255,255,255,0.06);
+            --border-accent: rgba(255,255,255,0.1);
+            --gradient-hero: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 50%, #f43f5e 100%);
+            --gradient-card: linear-gradient(145deg, rgba(59,130,246,0.08) 0%, rgba(139,92,246,0.05) 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Syne', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(10,10,11,0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            font-style: italic;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-primary);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 8rem 5rem 5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -30%;
+            width: 100%;
+            height: 150%;
+            background: radial-gradient(ellipse at center, rgba(59,130,246,0.15) 0%, transparent 60%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            bottom: -30%;
+            left: -20%;
+            width: 80%;
+            height: 100%;
+            background: radial-gradient(ellipse at center, rgba(139,92,246,0.1) 0%, transparent 50%);
+            animation: pulse 10s ease-in-out infinite reverse;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.5; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+        }
+
+        .hero-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .hero-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--accent-cyan);
+        }
+
+        .hero-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(3.5rem, 8vw, 7rem);
+            font-weight: 400;
+            line-height: 1.05;
+            margin-bottom: 2rem;
+        }
+
+        .hero-title em {
+            font-style: italic;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-family: 'Syne', sans-serif;
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--gradient-hero);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(59,130,246,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border: 1px solid var(--border-accent);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-tertiary);
+            border-color: var(--text-muted);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 8rem 5rem;
+            position: relative;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-label {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--accent-violet);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 400;
+        }
+
+        .section-title em {
+            font-style: italic;
+            color: var(--accent-blue);
+        }
+
+        .section-intro {
+            max-width: 800px;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-top: 1.5rem;
+        }
+
+        /* About Section */
+        #about {
+            background: var(--bg-secondary);
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 5rem;
+            align-items: start;
+        }
+
+        .about-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .stat-item {
+            padding: 2rem;
+            background: var(--bg-card);
+            border-radius: 16px;
+            border: 1px solid var(--border-subtle);
+            transition: all 0.3s ease;
+        }
+
+        .stat-item:hover {
+            border-color: var(--accent-blue);
+            transform: translateX(10px);
+        }
+
+        .stat-number {
+            font-family: 'Instrument Serif', serif;
+            font-size: 3rem;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            margin-top: 0.5rem;
+        }
+
+        .about-content p {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.9;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Skills Section */
+        #skills {
+            background: var(--bg-primary);
+        }
+
+        .skills-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            padding: 2.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .skill-category:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-5px);
+        }
+
+        .skill-category-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(59,130,246,0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-category-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--accent-blue);
+        }
+
+        .skill-category-icon.ai { background: rgba(139,92,246,0.15); }
+        .skill-category-icon.ai svg { color: var(--accent-violet); }
+        .skill-category-icon.frontend { background: rgba(6,182,212,0.15); }
+        .skill-category-icon.frontend svg { color: var(--accent-cyan); }
+        .skill-category-icon.backend { background: rgba(16,185,129,0.15); }
+        .skill-category-icon.backend svg { color: var(--accent-emerald); }
+        .skill-category-icon.tools { background: rgba(245,158,11,0.15); }
+        .skill-category-icon.tools svg { color: var(--accent-amber); }
+        .skill-category-icon.soft { background: rgba(244,63,94,0.15); }
+        .skill-category-icon.soft svg { color: var(--accent-rose); }
+
+        .skill-category h3 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.4rem;
+            margin-bottom: 1rem;
+        }
+
+        .skill-category p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skill-tag {
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent-cyan);
+            color: var(--accent-cyan);
+        }
+
+        /* Projects Section */
+        #projects {
+            background: var(--bg-secondary);
+        }
+
+        .projects-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 6rem;
+        }
+
+        .project-card {
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            padding: 3rem;
+            background: var(--gradient-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 24px;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-5px);
+        }
+
+        .project-card:nth-child(even) {
+            grid-template-columns: 1fr 1.2fr;
+        }
+
+        .project-card:nth-child(even) .project-visual {
+            order: -1;
+        }
+
+        .project-content {
+            padding: 1rem;
+        }
+
+        .project-tag {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(59,130,246,0.15);
+            color: var(--accent-blue);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-tag.saas { background: rgba(6,182,212,0.15); color: var(--accent-cyan); }
+        .project-tag.mobile { background: rgba(244,63,94,0.15); color: var(--accent-rose); }
+        .project-tag.research { background: rgba(139,92,246,0.15); color: var(--accent-violet); }
+        .project-tag.enterprise { background: rgba(16,185,129,0.15); color: var(--accent-emerald); }
+
+        .project-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 2.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            font-size: 1.05rem;
+        }
+
+        .project-details {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            padding-left: 1rem;
+            border-left: 2px solid var(--border-accent);
+        }
+
+        .project-features {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .feature-pill {
+            padding: 0.4rem 0.8rem;
+            background: var(--bg-tertiary);
+            border-radius: 6px;
+            font-family: 'DM Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            padding: 0.75rem 1.5rem;
+            background: var(--bg-tertiary);
+            border-radius: 30px;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .project-link:hover {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+            gap: 1rem;
+        }
+
+        .project-link svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .project-visual {
+            position: relative;
+            border-radius: 16px;
+            overflow: hidden;
+            min-height: 350px;
+        }
+
+        /* Education Section */
+        #education {
+            background: var(--bg-primary);
+        }
+
+        .education-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .education-card {
+            padding: 2.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .education-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-hero);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .education-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-5px);
+        }
+
+        .education-card:hover::before {
+            opacity: 1;
+        }
+
+        .education-date {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+        }
+
+        .education-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .education-institution {
+            color: var(--accent-violet);
+            font-weight: 500;
+            margin-bottom: 1rem;
+        }
+
+        .education-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+
+        .training-list {
+            margin-top: 3rem;
+        }
+
+        .training-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .training-items {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+        }
+
+        .training-item {
+            padding: 1.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .training-item:hover {
+            border-color: var(--accent-blue);
+        }
+
+        .training-item h4 {
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .training-item span {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        /* Research Section */
+        #research {
+            background: var(--bg-secondary);
+        }
+
+        .research-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+
+        .research-card {
+            padding: 2.5rem;
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .research-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--gradient-hero);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .research-card:hover {
+            border-color: var(--border-accent);
+            transform: translateY(-5px);
+        }
+
+        .research-card:hover::before {
+            opacity: 1;
+        }
+
+        .research-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(139,92,246,0.15);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-icon svg {
+            width: 24px;
+            height: 24px;
+            color: var(--accent-violet);
+        }
+
+        .research-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .research-abstract {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .research-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-violet);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: all 0.3s ease;
+        }
+
+        .research-link:hover {
+            gap: 1rem;
+        }
+
+        /* Contact Section */
+        #contact {
+            background: var(--bg-primary);
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-title {
+            font-family: 'Instrument Serif', serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-title em {
+            font-style: italic;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .contact-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 3rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border-subtle);
+            border-radius: 50px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-btn:hover {
+            border-color: var(--accent-blue);
+            background: var(--accent-blue);
+            transform: translateY(-2px);
+        }
+
+        .contact-btn svg {
+            width: 20px;
+            height: 20px;
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .contact-info p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5rem;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-secondary);
+        }
+
+        .footer-text {
+            font-family: 'DM Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Responsive */
+        @media (max-width: 1200px) {
+            .skills-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .training-items {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 1024px) {
+            nav {
+                padding: 1rem 2rem;
+            }
+            .nav-links {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(10,10,11,0.98);
+                flex-direction: column;
+                padding: 2rem;
+                gap: 1.5rem;
+                border-bottom: 1px solid var(--border-subtle);
+            }
+            .nav-links.active {
+                display: flex;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            section, .hero {
+                padding: 5rem 2rem;
+            }
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            .about-stats {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            .stat-item {
+                flex: 1;
+                min-width: 150px;
+            }
+            .project-card {
+                grid-template-columns: 1fr !important;
+                gap: 2rem;
+            }
+            .project-card .project-visual {
+                order: 0 !important;
+            }
+            .research-grid,
+            .education-grid {
+                grid-template-columns: 1fr;
+            }
+            .skills-container {
+                grid-template-columns: 1fr;
+            }
+            .training-items {
+                grid-template-columns: 1fr;
+            }
+            footer {
+                flex-direction: column;
+                gap: 1.5rem;
+                text-align: center;
+                padding: 2rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+        .delay-3 { animation-delay: 0.3s; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <a href="#hero" class="logo">EB.</a>
+        <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about" onclick="closeMenu()">About</a></li>
+            <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+            <li><a href="#projects" onclick="closeMenu()">Projects</a></li>
+            <li><a href="#education" onclick="closeMenu()">Education</a></li>
+            <li><a href="#research" onclick="closeMenu()">Research</a></li>
+            <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="hero-content">
+            <div class="hero-label animate-in">AI Engineer · Product Builder · Founder</div>
+            <h1 class="hero-title animate-in delay-1">
+                Edoardo<br>
+                <em>Bambini</em>
+            </h1>
+            <p class="hero-subtitle animate-in delay-2">
+                Building AI-powered products from concept to production. 
+                Focused on systems that solve real problems with clarity, 
+                reliability, and exceptional user experience. Based in Rome, Italy.
+            </p>
+            <div class="hero-cta animate-in delay-3">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="section-header">
+            <div class="section-label">01 — About</div>
+            <h2 class="section-title">Building <em>intelligent</em> systems</h2>
+        </div>
+        
+        <div class="about-grid">
+            <div class="about-stats">
+                <div class="stat-item">
+                    <div class="stat-number">5+</div>
+                    <div class="stat-label">Production AI Projects</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">3</div>
+                    <div class="stat-label">Research Publications</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">∞</div>
+                    <div class="stat-label">Curiosity & Drive</div>
+                </div>
+            </div>
+            
+            <div class="about-content">
+                <p>
+                    I'm an AI-focused full-stack engineer with hands-on experience designing, developing, and shipping production-ready AI applications end-to-end. I have a strong background in AI-driven systems, RAG pipelines, prompt engineering, and product-oriented software architecture, with a founder mindset and high autonomy in early-stage environments.
+                </p>
+                <p>
+                    I care deeply about clarity and usability, especially in technically complex products. I enjoy turning dense or abstract systems into interfaces that are intuitive, predictable, and trustworthy. To me, good engineering is inseparable from good UX: performance, reliability, and visual structure all directly influence how users perceive and adopt a product.
+                </p>
+                <p>
+                    Rather than treating AI as a black box or a marketing feature, I focus on building systems that are transparent, controllable, and reliable. I'm particularly interested in how complex technologies can be integrated responsibly into products without sacrificing user trust or understanding.
+                </p>
+                <p>
+                    One recurring theme in my work has been dealing with ambiguity. I'm comfortable operating without perfect specifications, asking the right questions early, and iterating toward robust solutions. I value teams where engineers are trusted to think critically, challenge assumptions, and take responsibility for outcomes rather than just tasks.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="section-header">
+            <div class="section-label">02 — Skills</div>
+            <h2 class="section-title">Technical <em>expertise</em></h2>
+            <p class="section-intro">
+                A versatile skill set covering the entire development stack, 
+                with particular focus on AI/ML, full-stack development, and product design.
+            </p>
+        </div>
+        
+        <div class="skills-container">
+            <div class="skill-category">
+                <div class="skill-category-icon ai">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h3>AI & Machine Learning</h3>
+                <p>Development of AI-powered applications, LLM integration, RAG system design, and prompt optimization for production use cases.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">LLMs</span>
+                    <span class="skill-tag">RAG Systems</span>
+                    <span class="skill-tag">Prompt Engineering</span>
+                    <span class="skill-tag">Vector Embeddings</span>
+                    <span class="skill-tag">AI Automation</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-icon frontend">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h3>Frontend & Mobile</h3>
+                <p>Creating modern, responsive, and accessible user interfaces with focus on UX/UI design and optimized performance.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">React</span>
+                    <span class="skill-tag">React Native</span>
+                    <span class="skill-tag">Expo</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">UI/UX Design</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-icon backend">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01" />
+                    </svg>
+                </div>
+                <h3>Backend & Database</h3>
+                <p>Scalable backend architecture, RESTful APIs, relational and NoSQL database management, authentication and authorization.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Node.js</span>
+                    <span class="skill-tag">Express</span>
+                    <span class="skill-tag">PostgreSQL</span>
+                    <span class="skill-tag">Firebase</span>
+                    <span class="skill-tag">pgvector</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h3>Languages & Programming</h3>
+                <p>Proficiency in multiple programming languages with focus on JavaScript ecosystem and Python for AI applications.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">JavaScript</span>
+                    <span class="skill-tag">TypeScript</span>
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">MATLAB</span>
+                    <span class="skill-tag">SQL</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-icon tools">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                    </svg>
+                </div>
+                <h3>Tools & Workflow</h3>
+                <p>Modern tools for development, version control, deployment, and team collaboration.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Replit</span>
+                    <span class="skill-tag">Vite</span>
+                    <span class="skill-tag">Firestore</span>
+                    <span class="skill-tag">Cloud Deployment</span>
+                </div>
+            </div>
+            
+            <div class="skill-category">
+                <div class="skill-category-icon soft">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+                    </svg>
+                </div>
+                <h3>Soft Skills</h3>
+                <p>Essential cross-functional skills for working effectively in teams and leading complex projects.</p>
+                <div class="skill-tags">
+                    <span class="skill-tag">Product Mindset</span>
+                    <span class="skill-tag">Problem Solving</span>
+                    <span class="skill-tag">Autonomy</span>
+                    <span class="skill-tag">Communication</span>
+                    <span class="skill-tag">Time Management</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="section-header">
+            <div class="section-label">03 — Projects</div>
+            <h2 class="section-title">Selected <em>work</em></h2>
+            <p class="section-intro">
+                A selection of my most significant projects, ranging from AI-powered mobile applications 
+                to enterprise platforms and decision-support systems for scientific research.
+            </p>
+        </div>
+        
+        <div class="projects-grid">
+            <!-- Macrofy -->
+            <div class="project-card">
+                <div class="project-content">
+                    <span class="project-tag mobile">Mobile App · Founder & CEO</span>
+                    <h3 class="project-title">Macrofy</h3>
+                    <p class="project-description">
+                        AI-powered mobile application for nutrition and fitness. Macrofy is your new AI ally for stress-free nutrition and fitness. Track meals, weight, and workouts with revolutionary simplicity, calculate your macronutrients, and get hyper-personalized plans.
+                    </p>
+                    <p class="project-details">
+                        Designed, developed, and deployed this production-ready application from scratch. Built the entire application architecture including authentication, cloud database, backend logic, and analytics. Implemented AI-driven automations and personalized recommendations, with complete ownership of product vision, technical decisions, and feature prioritization. Focus on usability, performance, and scalability in a real-world product.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-pill">React Native</span>
+                        <span class="feature-pill">Expo</span>
+                        <span class="feature-pill">Firebase</span>
+                        <span class="feature-pill">Firestore</span>
+                        <span class="feature-pill">AI Automation</span>
+                        <span class="feature-pill">Analytics</span>
+                    </div>
+                </div>
+                <div class="project-visual">
+                    <div style="background: linear-gradient(135deg, #f43f5e 0%, #f59e0b 100%); padding: 1.5rem; border-radius: 16px; height: 100%;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; height: 100%;">
+                            <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                <div style="font-family: 'Instrument Serif', serif; font-size: 1.8rem; color: #fff; margin-bottom: 0.5rem;">MACROFY</div>
+                                <div style="font-size: 0.8rem; color: rgba(255,255,255,0.8);">Shape Your Body</div>
+                            </div>
+                            <div style="background: rgba(0,0,0,0.3); border-radius: 12px; padding: 1rem; text-align: center;">
+                                <div style="font-size: 0.7rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem;">YOUR TARGETS</div>
+                                <div style="font-family: 'Instrument Serif', serif; font-size: 2rem; color: #fff;">2239 <span style="font-size: 0.9rem;">kcal</span></div>
+                                <div style="display: flex; justify-content: space-around; margin-top: 0.5rem; font-size: 0.75rem; color: rgba(255,255,255,0.8);">
+                                    <span>P: 135g</span>
+                                    <span>C: 290g</span>
+                                    <span>F: 60g</span>
+                                </div>
+                            </div>
+                            <div style="grid-column: span 2; background: rgba(0,0,0,0.3); border-radius: 12px; padding: 1rem;">
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;">
+                                    <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; text-align: center; color: #fff;">
+                                        <div style="font-size: 1.5rem; margin-bottom: 0.3rem;">🍽️</div>
+                                        <div style="font-size: 0.8rem;">Log Meals</div>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; text-align: center; color: #fff;">
+                                        <div style="font-size: 1.5rem; margin-bottom: 0.3rem;">📅</div>
+                                        <div style="font-size: 0.8rem;">Meal Plan</div>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; text-align: center; color: #fff;">
+                                        <div style="font-size: 1.5rem; margin-bottom: 0.3rem;">💪</div>
+                                        <div style="font-size: 0.8rem;">Training</div>
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.1); border-radius: 8px; padding: 1rem; text-align: center; color: #fff;">
+                                        <div style="font-size: 1.5rem; margin-bottom: 0.3rem;">📈</div>
+                                        <div style="font-size: 0.8rem;">Progress</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SciReason -->
+            <div class="project-card">
+                <div class="project-content">
+                    <span class="project-tag research">AI Platform · In Progress</span>
+                    <h3 class="project-title">SciReason</h3>
+                    <p class="project-description">
+                        Advanced decision-support system for scientific research & R&D. Transform research questions into structured evidence maps, hypothesis cards, and R&D roadmaps. The AI explicitly models scientific reasoning, not just summarization.
+                    </p>
+                    <p class="project-details">
+                        Designed an AI system that explicitly models scientific reasoning through structured pipelines: problem definition → evidence mapping → gap analysis → falsifiable hypothesis generation → decision gating → R&D roadmap. Focused on high-risk domains like pharmacology, physiology, and clinical research. The AI is deliberately non-accommodating: exposes uncertainty, bias, costs, risks, and failure modes. Built with React Native / Expo frontend, persistent session logic, and iterative UX for deep analytical workflows.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-pill">React Native</span>
+                        <span class="feature-pill">Expo</span>
+                        <span class="feature-pill">Structured Reasoning</span>
+                        <span class="feature-pill">Evidence Mapping</span>
+                        <span class="feature-pill">Hypothesis Generation</span>
+                        <span class="feature-pill">Decision Gating</span>
+                    </div>
+                </div>
+                <div class="project-visual">
+                    <div style="background: linear-gradient(145deg, #0f172a 0%, #1e293b 100%); padding: 1.5rem; border-radius: 16px; height: 100%;">
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; height: 100%;">
+                            <div style="background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.2); border-radius: 12px; padding: 1.5rem; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+                                <div style="width: 60px; height: 60px; background: linear-gradient(135deg, #3b82f6, #8b5cf6); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1rem;">
+                                    <svg style="width: 30px; height: 30px; color: white;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                                    </svg>
+                                </div>
+                                <div style="font-family: 'Syne', sans-serif; font-size: 1.2rem; color: #fff; font-weight: 600;">SciReason</div>
+                                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.6); margin-top: 0.5rem;">Scientific Reasoning AI</div>
+                            </div>
+                            <div style="background: rgba(139,92,246,0.1); border: 1px solid rgba(139,92,246,0.2); border-radius: 12px; padding: 1rem;">
+                                <div style="font-size: 0.7rem; color: #8b5cf6; margin-bottom: 0.75rem; font-weight: 600;">ANALYSIS MODES</div>
+                                <div style="background: rgba(59,130,246,0.2); border: 1px solid #3b82f6; border-radius: 8px; padding: 0.75rem; margin-bottom: 0.5rem;">
+                                    <div style="font-size: 0.8rem; color: #fff; font-weight: 500;">Evidence Mode</div>
+                                    <div style="font-size: 0.65rem; color: rgba(255,255,255,0.5);">Steps 1-7</div>
+                                </div>
+                                <div style="background: rgba(139,92,246,0.1); border-radius: 8px; padding: 0.75rem;">
+                                    <div style="font-size: 0.8rem; color: #fff; font-weight: 500;">R&D Roadmap</div>
+                                    <div style="font-size: 0.65rem; color: rgba(255,255,255,0.5);">Steps 1-9</div>
+                                </div>
+                            </div>
+                            <div style="grid-column: span 2; background: rgba(6,182,212,0.1); border: 1px solid rgba(6,182,212,0.2); border-radius: 12px; padding: 1rem;">
+                                <div style="font-size: 0.7rem; color: #06b6d4; margin-bottom: 0.5rem;">FEATURES</div>
+                                <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                                    <span style="background: rgba(255,255,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.7rem; color: rgba(255,255,255,0.8);">Evidence Cards</span>
+                                    <span style="background: rgba(255,255,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.7rem; color: rgba(255,255,255,0.8);">Hypothesis Gen</span>
+                                    <span style="background: rgba(255,255,255,0.1); padding: 0.3rem 0.6rem; border-radius: 4px; font-size: 0.7rem; color: rgba(255,255,255,0.8);">R&D Roadmaps</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Enterprise AI Knowledge Assistant -->
+            <div class="project-card">
+                <div class="project-content">
+                    <span class="project-tag enterprise">Enterprise · RAG Platform</span>
+                    <h3 class="project-title">Enterprise AI Navigator</h3>
+                    <p class="project-description">
+                        Enterprise-grade AI knowledge management platform. Complete system for secure document upload (PDF, DOCX, TXT) with Retrieval-Augmented Generation (RAG), semantic search, and role-based access control.
+                    </p>
+                    <p class="project-details">
+                        Designed and built an enterprise-grade knowledge management platform with secure document upload and RAG. Implemented semantic search using PostgreSQL + pgvector embeddings for high-precision retrieval. Role-based access control system (Admin, Manager, Employee) with complete audit logging, document sharing, and admin activity dashboards. Focus on compliance, traceability, and production-readiness for enterprise environments.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-pill">RAG</span>
+                        <span class="feature-pill">pgvector</span>
+                        <span class="feature-pill">PostgreSQL</span>
+                        <span class="feature-pill">RBAC</span>
+                        <span class="feature-pill">Audit Logging</span>
+                        <span class="feature-pill">Document Sharing</span>
+                    </div>
+                    <a href="https://enterprise-ai-navigator--bambiniedoardo.replit.app/login" target="_blank" rel="noopener noreferrer" class="project-link">
+                        Live Demo
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-visual">
+                    <div style="background: linear-gradient(145deg, #111827 0%, #1f2937 100%); padding: 2rem; border-radius: 16px; height: 100%; display: flex; flex-direction: column; justify-content: center;">
+                        <div style="text-align: center; margin-bottom: 2rem;">
+                            <div style="width: 70px; height: 70px; background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 16px; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem;">
+                                <svg style="width: 35px; height: 35px; color: white;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                </svg>
+                            </div>
+                            <div style="font-family: 'Instrument Serif', serif; font-size: 1.5rem; color: #fff;">Welcome back</div>
+                            <div style="font-size: 0.8rem; color: rgba(255,255,255,0.5); margin-top: 0.5rem;">Sign in to access your knowledge base</div>
+                        </div>
+                        <div style="max-width: 280px; margin: 0 auto; width: 100%;">
+                            <div style="margin-bottom: 1rem;">
+                                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem;">Email</div>
+                                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.75rem; color: rgba(255,255,255,0.3); font-size: 0.85rem;">you@company.com</div>
+                            </div>
+                            <div style="margin-bottom: 1.5rem;">
+                                <div style="font-size: 0.75rem; color: rgba(255,255,255,0.7); margin-bottom: 0.5rem;">Password</div>
+                                <div style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 0.75rem; color: rgba(255,255,255,0.3); font-size: 0.85rem;">••••••••</div>
+                            </div>
+                            <div style="background: linear-gradient(135deg, #3b82f6, #06b6d4); border-radius: 8px; padding: 0.85rem; text-align: center; color: white; font-weight: 600; font-size: 0.9rem;">Sign in</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- NicheScribe -->
+            <div class="project-card">
+                <div class="project-content">
+                    <span class="project-tag saas">SaaS · Content Marketing</span>
+                    <h3 class="project-title">NicheScribe AI</h3>
+                    <p class="project-description">
+                        Full-featured AI content generation SaaS for freelancers and small businesses. Multi-project management with audience targeting, tone & style control, multilingual generation, and SEO optimization.
+                    </p>
+                    <p class="project-details">
+                        Built a full-featured SaaS platform for content generation with multi-project management, personalized audience targeting, and granular tone & style control. Implemented multilingual generation for international markets, integrated SEO optimization, and freemium monetization model (free + premium tiers). End-to-end ownership: product design, frontend, backend, AI integration, and deployment. Focus on intuitive user experience for non-technical users.
+                    </p>
+                    <div class="project-features">
+                        <span class="feature-pill">AI Content Generation</span>
+                        <span class="feature-pill">Multilingual</span>
+                        <span class="feature-pill">SEO Optimization</span>
+                        <span class="feature-pill">Freemium Model</span>
+                        <span class="feature-pill">Full-Stack</span>
+                    </div>
+                    <a href="https://file-share-sync-bambiniedoardo.replit.app/" target="_blank" rel="noopener noreferrer" class="project-link">
+                        Live Demo
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                    </a>
+                </div>
+                <div class="project-visual">
+                    <div style="background: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%); width: 100%; height: 100%; min-height: 350px; display: flex; align-items: center; justify-content: center; border-radius: 16px;">
+                        <div style="text-align: center; color: white; padding: 2rem;">
+                            <svg style="width: 80px; height: 80px; margin-bottom: 1.5rem;" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+                            </svg>
+                            <div style="font-family: 'Instrument Serif', serif; font-size: 2rem; margin-bottom: 0.5rem;">NicheScribe</div>
+                            <div style="font-size: 0.9rem; opacity: 0.9;">AI Content Generation Platform</div>
+                            <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; justify-content: center; flex-wrap: wrap;">
+                                <span style="background: rgba(255,255,255,0.2); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem;">Multi-Project</span>
+                                <span style="background: rgba(255,255,255,0.2); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem;">SEO Ready</span>
+                                <span style="background: rgba(255,255,255,0.2); padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.75rem;">Multilingual</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education">
+        <div class="section-header">
+            <div class="section-label">04 — Education</div>
+            <h2 class="section-title">Academic <em>background</em></h2>
+            <p class="section-intro">
+                An educational path combining academic foundations in engineering with 
+                specialized training in computer science and AI through courses from leading institutions.
+            </p>
+        </div>
+        
+        <div class="education-grid">
+            <div class="education-card">
+                <div class="education-date">Sep 2024 — Present</div>
+                <h3 class="education-title">B.Sc. in Chemical Engineering and Processes</h3>
+                <div class="education-institution">Sapienza University of Rome</div>
+                <p class="education-description">
+                    EQF Level 6 program with focus on chemical processes, thermodynamics, 
+                    and engineering principles. Rigorous training in quantitative problem-solving 
+                    and scientific methodology applied to complex systems.
+                </p>
+            </div>
+            
+            <div class="education-card">
+                <div class="education-date">Completed</div>
+                <h3 class="education-title">CS50: Introduction to Computer Science</h3>
+                <div class="education-institution">Harvard University</div>
+                <p class="education-description">
+                    Completed the core curriculum independently covering C, Python, SQL, 
+                    algorithms, memory management, and data structures. Designed and submitted 
+                    the final project. Followed as a non-credit, self-paced academic course.
+                </p>
+            </div>
+            
+            <div class="education-card">
+                <div class="education-date">Sep 2020 — Jul 2024</div>
+                <h3 class="education-title">High School Diploma — Scientific Studies</h3>
+                <div class="education-institution">Liceo Scientifico Antonio Labriola, Rome</div>
+                <p class="education-description">
+                    EQF Level 4 diploma with curriculum focused on mathematics, physics, 
+                    natural sciences, and scientific methodology. Solid foundations in analytical 
+                    reasoning and problem-solving.
+                </p>
+            </div>
+            
+            <div class="education-card">
+                <div class="education-date">Languages</div>
+                <h3 class="education-title">Language Proficiency</h3>
+                <div class="education-institution">Certifications</div>
+                <p class="education-description">
+                    <strong>Italian:</strong> Native<br>
+                    <strong>English:</strong> C1 (listening, reading) · B2 (speaking, writing)
+                </p>
+            </div>
+        </div>
+        
+        <div class="training-list">
+            <h3 class="training-title">Continuous <em>Learning</em></h3>
+            <div class="training-items">
+                <div class="training-item">
+                    <h4>ChatGPT Prompt Engineering for Developers</h4>
+                    <span>DeepLearning.AI</span>
+                </div>
+                <div class="training-item">
+                    <h4>Building an AI-Powered Game</h4>
+                    <span>DeepLearning.AI</span>
+                </div>
+                <div class="training-item">
+                    <h4>AI Python</h4>
+                    <span>DeepLearning.AI</span>
+                </div>
+                <div class="training-item">
+                    <h4>Vibe Coding 101 with Replit</h4>
+                    <span>DeepLearning.AI</span>
+                </div>
+                <div class="training-item">
+                    <h4>MATLAB Fundamentals</h4>
+                    <span>MathWorks</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Research Section -->
+    <section id="research">
+        <div class="section-header">
+            <div class="section-label">05 — Research</div>
+            <h2 class="section-title">Independent <em>publications</em></h2>
+            <p class="section-intro">
+                Independent research focused on applying structured reasoning 
+                to Large Language Models and theoretical biotech research.
+            </p>
+        </div>
+        
+        <div class="research-grid">
+            <div class="research-card">
+                <div class="research-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h3 class="research-title">Phase-Gated Scientific Reasoning with Large Language Models</h3>
+                <p class="research-abstract">
+                    Independent research paper proposing a phase-gated reasoning framework for LLMs. 
+                    Designed structured reasoning stages to transform LLMs from answer generators into 
+                    decision-support systems. Introduces explicit evidence mapping, gap analysis, 
+                    falsifiable hypothesis generation, and go/no-go decision logic. Emphasis on 
+                    non-accommodating AI behavior: uncertainty declaration, evidence strength separation, 
+                    and failure awareness. Focus on applicability to high-risk scientific and R&D contexts.
+                </p>
+                <a href="https://drive.google.com/file/d/1tjazI6Hu4IiFnFnP5j7B403d701spvct/view" target="_blank" rel="noopener noreferrer" class="research-link">
+                    Read Paper
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
+            </div>
+            
+            <div class="research-card">
+                <div class="research-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z" />
+                    </svg>
+                </div>
+                <h3 class="research-title">Myostatin Inhibition via siRNA: Theoretical Research</h3>
+                <p class="research-abstract">
+                    Independent theoretical research project on siRNA-based inhibition of the MSTN gene. 
+                    Covers sequence optimization, nanoparticle delivery strategies, and preclinical 
+                    development phases. Includes explicit risk assessment, failure modes, and 
+                    economic/market evaluation reflecting realistic biotech R&D constraints. 
+                    Structured to reflect realistic biotech R&D constraints rather than speculative outcomes.
+                </p>
+                <a href="https://drive.google.com/file/d/1DajH3wKxf2ndxffxkhpKvEjPuvTxB4pE/view" target="_blank" rel="noopener noreferrer" class="research-link">
+                    Read Paper
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" style="width: 16px; height: 16px;">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="contact-content">
+            <div class="section-label">06 — Contact</div>
+            <h2 class="contact-title">Let's build <em>something great</em></h2>
+            <p class="contact-text">
+                I'm always interested in discussing new opportunities, collaborations, 
+                or just having a conversation about AI and product development. 
+                Don't hesitate to reach out!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:bambiniedoardo@gmail.com" class="contact-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    bambiniedoardo@gmail.com
+                </a>
+                <a href="tel:+393206321082" class="contact-btn">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    +39 320 632 1082
+                </a>
+            </div>
+            <div class="contact-info">
+                <p>📍 Rome, Italy</p>
+                <p>🇮🇹 Italian Citizen</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-text">© 2025 Edoardo Bambini — Built with passion in Rome, Italy</div>
+        <div class="footer-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#education">Education</a>
+            <a href="#research">Research</a>
+            <a href="mailto:bambiniedoardo@gmail.com">Contact</a>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.getElementById('navLinks').classList.toggle('active');
+        }
+        
+        function closeMenu() {
+            document.getElementById('navLinks').classList.remove('active');
+        }
+
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.project-card, .research-card, .stat-item, .skill-category, .education-card, .training-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(10,10,11,0.95)';
+            } else {
+                nav.style.background = 'rgba(10,10,11,0.8)';
+            }
+        });
+
+        document.addEventListener('click', (e) => {
+            const nav = document.querySelector('nav');
+            const navLinks = document.getElementById('navLinks');
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>
